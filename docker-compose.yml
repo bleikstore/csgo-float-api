@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  csgofloat:
+    image: us-central1-docker.pkg.dev/bleik-285420/cloud-run-images/csgofloat-service
+    container_name: csgofloat
+    volumes:
+      - type: bind
+        source: .
+        target: /config/
+    ports:
+      - "8081:8080"
+      - "443:443"
+    restart: always
+    depends_on:
+      - db

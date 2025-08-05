@@ -13,8 +13,10 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
 VOLUME /config
+
+# Copy config file into the volume
+COPY config.js /config/
 
 CMD [ "/bin/bash", "docker_start.sh" ]

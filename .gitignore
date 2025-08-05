@@ -5,3 +5,8 @@ sentry
 game_files
 .DS_Store
 .idea
+data
+steam_data
+config.js
+config_service.js
+config_validate.js
